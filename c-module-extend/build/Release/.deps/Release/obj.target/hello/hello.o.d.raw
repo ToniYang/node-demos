@@ -1,0 +1,7 @@
+Release/obj.target/hello/hello.o: ../hello.cc \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/node.h \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/v8.h \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/v8-version.h \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/v8config.h \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/node_version.h \
+  /Users/yangyuhan/.node-gyp/4.1.0/include/node/hello.h
