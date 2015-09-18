@@ -1,0 +1,11 @@
+{
+  "name": "package test",
+  "version": "1.0.0",
+  "description": "test node  require packages",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ToniYang",
+  "license": "ISC"
+}
