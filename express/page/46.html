@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UDP / Datagram Sockets Node.js v4.2.1 Manual &amp; Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/sh.css">
+  <link rel="canonical" href="https://nodejs.org/api/dgram.html">
+</head>
+<body class="alt apidoc" id="api-section-dgram">
+  <div id="content" class="clearfix">
+    <div id="column2" class="interior">
+      <div id="intro" class="interior">
+        <a href="/" title="Go back to the home page">
+          Node.js (1)
+        </a>
+      </div>
+      <ul>
+<li><a class="nav-documentation" href="documentation.html">About these Docs</a></li>
+<li><a class="nav-synopsis" href="synopsis.html">Synopsis</a></li>
+<li><a class="nav-assert" href="assert.html">Assertion Testing</a></li>
+<li><a class="nav-buffer" href="buffer.html">Buffer</a></li>
+<li><a class="nav-addons" href="addons.html">C/C++ Addons</a></li>
+<li><a class="nav-child_process" href="child_process.html">Child Processes</a></li>
+<li><a class="nav-cluster" href="cluster.html">Cluster</a></li>
+<li><a class="nav-console" href="console.html">Console</a></li>
+<li><a class="nav-crypto" href="crypto.html">Crypto</a></li>
+<li><a class="nav-debugger" href="debugger.html">Debugger</a></li>
+<li><a class="nav-dns" href="dns.html">DNS</a></li>
+<li><a class="nav-domain" href="domain.html">Domain</a></li>
+<li><a class="nav-errors" href="errors.html">Errors</a></li>
+<li><a class="nav-events" href="events.html">Events</a></li>
+<li><a class="nav-fs" href="fs.html">File System</a></li>
+<li><a class="nav-globals" href="globals.html">Globals</a></li>
+<li><a class="nav-http" href="http.html">HTTP</a></li>
+<li><a class="nav-https" href="https.html">HTTPS</a></li>
+<li><a class="nav-modules" href="modules.html">Modules</a></li>
+<li><a class="nav-net" href="net.html">Net</a></li>
+<li><a class="nav-os" href="os.html">OS</a></li>
+<li><a class="nav-path" href="path.html">Path</a></li>
+<li><a class="nav-process" href="process.html">Process</a></li>
+<li><a class="nav-punycode" href="punycode.html">Punycode</a></li>
+<li><a class="nav-querystring" href="querystring.html">Query Strings</a></li>
+<li><a class="nav-readline" href="readline.html">Readline</a></li>
+<li><a class="nav-repl" href="repl.html">REPL</a></li>
+<li><a class="nav-stream" href="stream.html">Stream</a></li>
+<li><a class="nav-string_decoder" href="string_decoder.html">String Decoder</a></li>
+<li><a class="nav-timers" href="timers.html">Timers</a></li>
+<li><a class="nav-tls" href="tls.html">TLS/SSL</a></li>
+<li><a class="nav-tty" href="tty.html">TTY</a></li>
+<li><a class="nav-dgram active" href="dgram.html">UDP/Datagram</a></li>
+<li><a class="nav-url" href="url.html">URL</a></li>
+<li><a class="nav-util" href="util.html">Utilities</a></li>
+<li><a class="nav-v8" href="v8.html">V8</a></li>
+<li><a class="nav-vm" href="vm.html">VM</a></li>
+<li><a class="nav-zlib" href="zlib.html">ZLIB</a></li>
+</ul>
+
+    </div>
+
+    <div id="column1" data-id="dgram" class="interior">
+      <header>
+        <h1>Node.js v4.2.1 Documentation</h1>
+        <div id="gtoc">
+          <p>
+            <a href="index.html" name="toc">Index</a> |
+            <a href="all.html">View on single page</a> |
+            <a href="dgram.json">View as JSON</a>
+          </p>
+        </div>
+        <hr>
+      </header>
+
+      <div id="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+<li><a href="#dgram_udp_datagram_sockets">UDP / Datagram Sockets</a><ul>
+<li><a href="#dgram_dgram_createsocket_type_callback">dgram.createSocket(type[, callback])</a></li>
+<li><a href="#dgram_dgram_createsocket_options_callback">dgram.createSocket(options[, callback])</a></li>
+<li><a href="#dgram_class_dgram_socket">Class: dgram.Socket</a><ul>
+<li><a href="#dgram_event_message">Event: &#39;message&#39;</a></li>
+<li><a href="#dgram_event_listening">Event: &#39;listening&#39;</a></li>
+<li><a href="#dgram_event_close">Event: &#39;close&#39;</a></li>
+<li><a href="#dgram_event_error">Event: &#39;error&#39;</a></li>
+<li><a href="#dgram_socket_send_buf_offset_length_port_address_callback">socket.send(buf, offset, length, port, address[, callback])</a></li>
+<li><a href="#dgram_socket_bind_port_address_callback">socket.bind([port][, address][, callback])</a></li>
+<li><a href="#dgram_socket_bind_options_callback">socket.bind(options[, callback])</a></li>
+<li><a href="#dgram_socket_close_callback">socket.close([callback])</a></li>
+<li><a href="#dgram_socket_address">socket.address()</a></li>
+<li><a href="#dgram_socket_setbroadcast_flag">socket.setBroadcast(flag)</a></li>
+<li><a href="#dgram_socket_setttl_ttl">socket.setTTL(ttl)</a></li>
+<li><a href="#dgram_socket_setmulticastttl_ttl">socket.setMulticastTTL(ttl)</a></li>
+<li><a href="#dgram_socket_setmulticastloopback_flag">socket.setMulticastLoopback(flag)</a></li>
+<li><a href="#dgram_socket_addmembership_multicastaddress_multicastinterface">socket.addMembership(multicastAddress[, multicastInterface])</a></li>
+<li><a href="#dgram_socket_dropmembership_multicastaddress_multicastinterface">socket.dropMembership(multicastAddress[, multicastInterface])</a></li>
+<li><a href="#dgram_socket_unref">socket.unref()</a></li>
+<li><a href="#dgram_socket_ref">socket.ref()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+
+      <div id="apicontent">
+        <h1>UDP / Datagram Sockets<span><a class="mark" href="#dgram_udp_datagram_sockets" id="dgram_udp_datagram_sockets">#</a></span></h1>
+<pre class="api_stability_2">Stability: 2 - Stable</pre><!-- name=dgram -->
+
+<p>Datagram sockets are available through <code>require(&#39;dgram&#39;)</code>.
+
+</p>
+<p>Important note: the behavior of <code>dgram.Socket#bind()</code> has changed in v0.10
+and is always asynchronous now.  If you have code that looks like this:
+
+</p>
+<pre><code>var s = dgram.createSocket(&#39;udp4&#39;);
+s.bind(1234);
+s.addMembership(&#39;224.0.0.114&#39;);</code></pre>
+<p>You have to change it to this:
+
+</p>
+<pre><code>var s = dgram.createSocket(&#39;udp4&#39;);
+s.bind(1234, function() {
+  s.addMembership(&#39;224.0.0.114&#39;);
+});</code></pre>
+<h2>dgram.createSocket(type[, callback])<span><a class="mark" href="#dgram_dgram_createsocket_type_callback" id="dgram_dgram_createsocket_type_callback">#</a></span></h2>
+<div class="signature"><ul>
+<li><code>type</code> String. Either &#39;udp4&#39; or &#39;udp6&#39;</li>
+<li><code>callback</code> Function. Attached as a listener to <code>message</code> events.
+Optional</li>
+<li>Returns: Socket object</li>
+</div></ul>
+<p>Creates a datagram Socket of the specified types.  Valid types are <code>udp4</code>
+and <code>udp6</code>.
+
+</p>
+<p>Takes an optional callback which is added as a listener for <code>message</code> events.
+
+</p>
+<p>Call <code>socket.bind()</code> if you want to receive datagrams. <code>socket.bind()</code> will
+bind to the &quot;all interfaces&quot; address on a random port (it does the right thing
+for both <code>udp4</code> and <code>udp6</code> sockets). You can then retrieve the address and port
+with <code>socket.address().address</code> and <code>socket.address().port</code>.
+
+</p>
+<h2>dgram.createSocket(options[, callback])<span><a class="mark" href="#dgram_dgram_createsocket_options_callback" id="dgram_dgram_createsocket_options_callback">#</a></span></h2>
+<div class="signature"><ul>
+<li><code>options</code> Object</li>
+<li><code>callback</code> Function. Attached as a listener to <code>message</code> events.</li>
+<li>Returns: Socket object</li>
+</div></ul>
+<p>The <code>options</code> object should contain a <code>type</code> field of either <code>udp4</code> or <code>udp6</code>
+and an optional boolean <code>reuseAddr</code> field.
+
+</p>
+<p>When <code>reuseAddr</code> is <code>true</code> <code>socket.bind()</code> will reuse the address, even if
+another process has already bound a socket on it. <code>reuseAddr</code> defaults to
+<code>false</code>.
+
+</p>
+<p>Takes an optional callback which is added as a listener for <code>message</code> events.
+
+</p>
+<p>Call <code>socket.bind()</code> if you want to receive datagrams. <code>socket.bind()</code> will
+bind to the &quot;all interfaces&quot; address on a random port (it does the right thing
+for both <code>udp4</code> and <code>udp6</code> sockets). You can then retrieve the address and port
+with <code>socket.address().address</code> and <code>socket.address().port</code>.
+
+</p>
+<h2>Class: dgram.Socket<span><a class="mark" href="#dgram_class_dgram_socket" id="dgram_class_dgram_socket">#</a></span></h2>
+<p>The dgram Socket class encapsulates the datagram functionality.  It
+should be created via <code>dgram.createSocket(...)</code>
+
+</p>
+<h3>Event: &#39;message&#39;<span><a class="mark" href="#dgram_event_message" id="dgram_event_message">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>msg</code> Buffer object. The message</li>
+<li><code>rinfo</code> Object. Remote address information</li>
+</div></ul>
+<p>Emitted when a new datagram is available on a socket.  <code>msg</code> is a <code>Buffer</code> and
+<code>rinfo</code> is an object with the sender&#39;s address information:
+
+</p>
+<pre><code>socket.on(&#39;message&#39;, function(msg, rinfo) {
+  console.log(&#39;Received %d bytes from %s:%d\n&#39;,
+              msg.length, rinfo.address, rinfo.port);
+});</code></pre>
+<h3>Event: &#39;listening&#39;<span><a class="mark" href="#dgram_event_listening" id="dgram_event_listening">#</a></span></h3>
+<p>Emitted when a socket starts listening for datagrams.  This happens as soon as UDP sockets
+are created.
+
+</p>
+<h3>Event: &#39;close&#39;<span><a class="mark" href="#dgram_event_close" id="dgram_event_close">#</a></span></h3>
+<p>Emitted after a socket is closed with <code>close()</code>.  No new <code>message</code> events will be emitted
+on this socket.
+
+</p>
+<h3>Event: &#39;error&#39;<span><a class="mark" href="#dgram_event_error" id="dgram_event_error">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>exception</code> Error object</li>
+</div></ul>
+<p>Emitted when an error occurs.
+
+</p>
+<h3>socket.send(buf, offset, length, port, address[, callback])<span><a class="mark" href="#dgram_socket_send_buf_offset_length_port_address_callback" id="dgram_socket_send_buf_offset_length_port_address_callback">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>buf</code> Buffer object or string.  Message to be sent</li>
+<li><code>offset</code> Integer. Offset in the buffer where the message starts.</li>
+<li><code>length</code> Integer. Number of bytes in the message.</li>
+<li><code>port</code> Integer. Destination port.</li>
+<li><code>address</code> String. Destination hostname or IP address.</li>
+<li><code>callback</code> Function. Called when the message has been sent. Optional.</li>
+</div></ul>
+<p>For UDP sockets, the destination port and address must be specified.  A string
+may be supplied for the <code>address</code> parameter, and it will be resolved with DNS.
+
+</p>
+<p>If the address is omitted or is an empty string, <code>&#39;0.0.0.0&#39;</code> or <code>&#39;::0&#39;</code> is used
+instead.  Depending on the network configuration, those defaults may or may not
+work; it&#39;s best to be explicit about the destination address.
+
+</p>
+<p>If the socket has not been previously bound with a call to <code>bind</code>, it gets
+assigned a random port number and is bound to the &quot;all interfaces&quot; address
+(<code>&#39;0.0.0.0&#39;</code> for <code>udp4</code> sockets, <code>&#39;::0&#39;</code> for <code>udp6</code> sockets.)
+
+</p>
+<p>An optional callback may be specified to detect DNS errors or for determining
+when it&#39;s safe to reuse the <code>buf</code> object.  Note that DNS lookups delay the time
+to send for at least one tick.  The only way to know for sure that the datagram
+has been sent is by using a callback. If an error occurs and a callback is
+given, the error will be the first argument to the callback. If a callback is
+not given, the error is emitted as an <code>&#39;error&#39;</code> event on the <code>socket</code> object.
+
+</p>
+<p>With consideration for multi-byte characters, <code>offset</code> and <code>length</code> will
+be calculated with respect to
+<a href="buffer.html#buffer_class_method_buffer_bytelength_string_encoding">byte length</a>
+and not the character position.
+
+</p>
+<p>Example of sending a UDP packet to a random port on <code>localhost</code>;
+
+</p>
+<pre><code>var dgram = require(&#39;dgram&#39;);
+var message = new Buffer(&quot;Some bytes&quot;);
+var client = dgram.createSocket(&quot;udp4&quot;);
+client.send(message, 0, message.length, 41234, &quot;localhost&quot;, function(err) {
+  client.close();
+});</code></pre>
+<p><strong>A Note about UDP datagram size</strong>
+
+</p>
+<p>The maximum size of an <code>IPv4/v6</code> datagram depends on the <code>MTU</code> (<em>Maximum Transmission Unit</em>)
+and on the <code>Payload Length</code> field size.
+
+</p>
+<ul>
+<li><p>The <code>Payload Length</code> field is <code>16 bits</code> wide, which means that a normal payload
+cannot be larger than 64K octets including internet header and data
+(65,507 bytes = 65,535 − 8 bytes UDP header − 20 bytes IP header);
+this is generally true for loopback interfaces, but such long datagrams
+are impractical for most hosts and networks.</p>
+</li>
+<li><p>The <code>MTU</code> is the largest size a given link layer technology can support for datagrams.
+For any link, <code>IPv4</code> mandates a minimum <code>MTU</code> of <code>68</code> octets, while the recommended <code>MTU</code>
+for IPv4 is <code>576</code> (typically recommended as the <code>MTU</code> for dial-up type applications),
+whether they arrive whole or in fragments.</p>
+<p>For <code>IPv6</code>, the minimum <code>MTU</code> is <code>1280</code> octets, however, the mandatory minimum
+fragment reassembly buffer size is <code>1500</code> octets.
+The value of <code>68</code> octets is very small, since most current link layer technologies have
+a minimum <code>MTU</code> of <code>1500</code> (like Ethernet).</p>
+</li>
+</ul>
+<p>Note that it&#39;s impossible to know in advance the MTU of each link through which
+a packet might travel, and that generally sending a datagram greater than
+the (receiver) <code>MTU</code> won&#39;t work (the packet gets silently dropped, without
+informing the source that the data did not reach its intended recipient).
+
+</p>
+<h3>socket.bind([port][, address][, callback])<span><a class="mark" href="#dgram_socket_bind_port_address_callback" id="dgram_socket_bind_port_address_callback">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>port</code> Integer, Optional</li>
+<li><code>address</code> String, Optional</li>
+<li><code>callback</code> Function with no parameters, Optional. Callback when
+binding is done.</li>
+</div></ul>
+<p>For UDP sockets, listen for datagrams on a named <code>port</code> and optional
+<code>address</code>. If <code>port</code> is not specified, the OS will try to bind to a random
+port. If <code>address</code> is not specified, the OS will try to listen on
+all addresses.  After binding is done, a &quot;listening&quot; event is emitted
+and the <code>callback</code>(if specified) is called. Specifying both a
+&quot;listening&quot; event listener and <code>callback</code> is not harmful but not very
+useful.
+
+</p>
+<p>A bound datagram socket keeps the Node.js process running to receive
+datagrams.
+
+</p>
+<p>If binding fails, an &quot;error&quot; event is generated. In rare case (e.g.
+binding a closed socket), an <code>Error</code> may be thrown by this method.
+
+</p>
+<p>Example of a UDP server listening on port 41234:
+
+</p>
+<pre><code>var dgram = require(&quot;dgram&quot;);
+
+var server = dgram.createSocket(&quot;udp4&quot;);
+
+server.on(&quot;error&quot;, function (err) {
+  console.log(&quot;server error:\n&quot; + err.stack);
+  server.close();
+});
+
+server.on(&quot;message&quot;, function (msg, rinfo) {
+  console.log(&quot;server got: &quot; + msg + &quot; from &quot; +
+    rinfo.address + &quot;:&quot; + rinfo.port);
+});
+
+server.on(&quot;listening&quot;, function () {
+  var address = server.address();
+  console.log(&quot;server listening &quot; +
+      address.address + &quot;:&quot; + address.port);
+});
+
+server.bind(41234);
+// server listening 0.0.0.0:41234</code></pre>
+<h3>socket.bind(options[, callback])<span><a class="mark" href="#dgram_socket_bind_options_callback" id="dgram_socket_bind_options_callback">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>options</code> <span class="type">Object</span> - Required. Supports the following properties:<ul>
+<li><code>port</code> <span class="type">Number</span> - Required.</li>
+<li><code>address</code> <span class="type">String</span> - Optional.</li>
+<li><code>exclusive</code> <span class="type">Boolean</span> - Optional.</li>
+</ul>
+</li>
+<li><code>callback</code> <span class="type">Function</span> - Optional.</li>
+</div></ul>
+<p>The <code>port</code> and <code>address</code> properties of <code>options</code>, as well as the optional
+callback function, behave as they do on a call to
+<a href="#dgram_socket_bind_port_address_callback">socket.bind(port, [address], [callback])
+</a>.
+
+</p>
+<p>If <code>exclusive</code> is <code>false</code> (default), then cluster workers will use the same
+underlying handle, allowing connection handling duties to be shared. When
+<code>exclusive</code> is <code>true</code>, the handle is not shared, and attempted port sharing
+results in an error. An example which listens on an exclusive port is
+shown below.
+
+</p>
+<pre><code>socket.bind({
+  address: &#39;localhost&#39;,
+  port: 8000,
+  exclusive: true
+});</code></pre>
+<h3>socket.close([callback])<span><a class="mark" href="#dgram_socket_close_callback" id="dgram_socket_close_callback">#</a></span></h3>
+<p>Close the underlying socket and stop listening for data on it. If a callback is
+provided, it is added as a listener for the <a href="#dgram_event_close">&#39;close&#39;</a> event.
+
+</p>
+<h3>socket.address()<span><a class="mark" href="#dgram_socket_address" id="dgram_socket_address">#</a></span></h3>
+<p>Returns an object containing the address information for a socket.  For UDP sockets,
+this object will contain <code>address</code> , <code>family</code> and <code>port</code>.
+
+</p>
+<h3>socket.setBroadcast(flag)<span><a class="mark" href="#dgram_socket_setbroadcast_flag" id="dgram_socket_setbroadcast_flag">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>flag</code> Boolean</li>
+</div></ul>
+<p>Sets or clears the <code>SO_BROADCAST</code> socket option.  When this option is set, UDP packets
+may be sent to a local interface&#39;s broadcast address.
+
+</p>
+<h3>socket.setTTL(ttl)<span><a class="mark" href="#dgram_socket_setttl_ttl" id="dgram_socket_setttl_ttl">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>ttl</code> Integer</li>
+</div></ul>
+<p>Sets the <code>IP_TTL</code> socket option.  TTL stands for &quot;Time to Live,&quot; but in this context it
+specifies the number of IP hops that a packet is allowed to go through.  Each router or
+gateway that forwards a packet decrements the TTL.  If the TTL is decremented to 0 by a
+router, it will not be forwarded.  Changing TTL values is typically done for network
+probes or when multicasting.
+
+</p>
+<p>The argument to <code>setTTL()</code> is a number of hops between 1 and 255.  The default on most
+systems is 64.
+
+</p>
+<h3>socket.setMulticastTTL(ttl)<span><a class="mark" href="#dgram_socket_setmulticastttl_ttl" id="dgram_socket_setmulticastttl_ttl">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>ttl</code> Integer</li>
+</div></ul>
+<p>Sets the <code>IP_MULTICAST_TTL</code> socket option.  TTL stands for &quot;Time to Live,&quot; but in this
+context it specifies the number of IP hops that a packet is allowed to go through,
+specifically for multicast traffic.  Each router or gateway that forwards a packet
+decrements the TTL. If the TTL is decremented to 0 by a router, it will not be forwarded.
+
+</p>
+<p>The argument to <code>setMulticastTTL()</code> is a number of hops between 0 and 255.  The default on most
+systems is 1.
+
+</p>
+<h3>socket.setMulticastLoopback(flag)<span><a class="mark" href="#dgram_socket_setmulticastloopback_flag" id="dgram_socket_setmulticastloopback_flag">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>flag</code> Boolean</li>
+</div></ul>
+<p>Sets or clears the <code>IP_MULTICAST_LOOP</code> socket option.  When this option is set, multicast
+packets will also be received on the local interface.
+
+</p>
+<h3>socket.addMembership(multicastAddress[, multicastInterface])<span><a class="mark" href="#dgram_socket_addmembership_multicastaddress_multicastinterface" id="dgram_socket_addmembership_multicastaddress_multicastinterface">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>multicastAddress</code> String</li>
+<li><code>multicastInterface</code> String, Optional</li>
+</div></ul>
+<p>Tells the kernel to join a multicast group with <code>IP_ADD_MEMBERSHIP</code> socket option.
+
+</p>
+<p>If <code>multicastInterface</code> is not specified, the OS will try to add membership to all valid
+interfaces.
+
+</p>
+<h3>socket.dropMembership(multicastAddress[, multicastInterface])<span><a class="mark" href="#dgram_socket_dropmembership_multicastaddress_multicastinterface" id="dgram_socket_dropmembership_multicastaddress_multicastinterface">#</a></span></h3>
+<div class="signature"><ul>
+<li><code>multicastAddress</code> String</li>
+<li><code>multicastInterface</code> String, Optional</li>
+</div></ul>
+<p>Opposite of <code>addMembership</code> - tells the kernel to leave a multicast group with
+<code>IP_DROP_MEMBERSHIP</code> socket option. This is automatically called by the kernel
+when the socket is closed or process terminates, so most apps will never need to call
+this.
+
+</p>
+<p>If <code>multicastInterface</code> is not specified, the OS will try to drop membership to all valid
+interfaces.
+
+</p>
+<h3>socket.unref()<span><a class="mark" href="#dgram_socket_unref" id="dgram_socket_unref">#</a></span></h3>
+<p>Calling <code>unref</code> on a socket will allow the program to exit if this is the only
+active socket in the event system. If the socket is already <code>unref</code>d calling
+<code>unref</code> again will have no effect.
+
+</p>
+<p>Returns <code>socket</code>.
+
+</p>
+<h3>socket.ref()<span><a class="mark" href="#dgram_socket_ref" id="dgram_socket_ref">#</a></span></h3>
+<p>Opposite of <code>unref</code>, calling <code>ref</code> on a previously <code>unref</code>d socket will <em>not</em>
+let the program exit if it&#39;s the only socket left (the default behavior). If
+the socket is <code>ref</code>d calling <code>ref</code> again will have no effect.
+
+</p>
+<p>Returns <code>socket</code>.
+</p>
+
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+  </div>
+
+  <script src="assets/sh_main.js"></script>
+  <script src="assets/sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
+
+<code>port</code> and <code>host</code> (old API) or
+<code>options.port</code> and <code>options.host</code>. (If <code>host</code> is omitted, it defaults to
+<code>localhost</code>.) <code>options</code> should be an object which specifies:
+
+</p>
+<ul>
+<li><p><code>host</code>: Host the client should connect to</p>
+</li>
+<li><p><code>port</code>: Port the client should connect to</p>
+</li>
+<li><p><code>socket</code>: Establish secure connection on a given socket rather than
+creating a new socket. If this option is specified, <code>host</code> and <code>port</code>
+are ignored.</p>
+</li>
+<li><p><code>path</code>: Creates unix socket connection to path. If this option is
+specified, <code>host</code> and <code>port</code> are ignored.</p>
+</li>
+<li><p><code>pfx</code>: A string or <code>Buffer</code> containing the private key, certificate and
+CA certs of the client in PFX or PKCS12 format.</p>
+</li>
+<li><p><code>key</code>: A string or <code>Buffer</code> containing the private key of the client in
+PEM format. (Could be an array of keys).</p>
+</li>
+<li><p><code>passphrase</code>: A string of passphrase for the private key or pfx.</p>
+</li>
+<li><p><code>cert</code>: A string or <code>Buffer</code> containing the certificate key of the client in
+PEM format. (Could be an array of certs).</p>
+</li>
+<li><p><code>ca</code>: An array of strings or <code>Buffer</code>s of trusted certificates in PEM
+format. If this is omitted several well known &quot;root&quot; CAs will be used,
+like VeriSign. These are used to authorize connections.</p>
+</li>
+<li><p><code>ciphers</code>: A string describing the ciphers to use or exclude, separated by
+<code>:</code>. Uses the same default cipher suite as <code>tls.createServer</code>.</p>
+</li>
+<li><p><code>rejectUnauthorized</code>: If <code>true</code>, the server certificate is verified against
+the list of supplied CAs. An <code>&#39;error&#39;</code> event is emitted if verification
+fails; <code>err.code</code> contains the OpenSSL error code. Default: <code>true</code>.</p>
+</li>
+<li><p><code>NPNProtocols</code>: An array of strings or <code>Buffer</code>s containing supported NPN
+protocols. <code>Buffer</code>s should have following format: <code>0x05hello0x05world</code>,
+where first byte is next protocol name&#39;s length. (Passing array should
+usually be much simpler: <code>[&#39;hello&#39;, &#39;world&#39;]</code>.)</p>
+</li>
+<li><p><code>servername</code>: Servername for SNI (Server Name Indication) TLS extension.</p>
+</li>
+<li><p><code>checkServerIdentity(servername, cert)</code>: Provide an override for checking
+server&#39;s hostname against the certificate. Should return an error if verification
+fails. Return <code>undefined</code> if passing.</p>
+</li>
+<li><p><code>secureProtocol</code>: The SSL method to use, e.g. <code>SSLv3_method</code> to force
+SSL version 3. The possible values depend on your installation of
+OpenSSL and are defined in the constant <a href="http://www.openssl.org/docs/ssl/ssl.html#DEALING_WITH_PROTOCOL_METHODS">SSL_METHODS</a>.</p>
+</li>
+<li><p><code>session</code>: A <code>Buffer</code> instance, containing TLS session.</p>
+</li>
+</ul>
+<p>The <code>callback</code> parameter will be added as a listener for the
+<a href="#tls_event_secureconnect">&#39;secureConnect&#39;</a> event.
+
+</p>
+<p><code>tls.connect()</code> returns a <a href="#tls_class_tls_tlssocket">tls.TLSSocket</a> object.
+
+</p>
+<p>Here is an example of a client of echo server as described previously:
+
+</p>
+<pre><code>var tls = require(&#39;tls&#39;);
+var fs = require(&#39;fs&#39;);
+
+var options = {
+  // These are necessary only if using the client certificate authentication
+  key: fs.readFileSync(&#39;client-key.pem&#39;),
+  cert: fs.readFileSync(&#39;client-cert.pem&#39;),
+
+  // This is necessary only if the server uses the self-signed certificate
+  ca: [ fs.readFileSync(&#39;server-cert.pem&#39;) ]
+};
+
+var socket = tls.connect(8000, options, function() {
+  console.log(&#39;client connected&#39;,
+              socket.authorized ? &#39;authorized&#39; : &#39;unauthorized&#39;);
+  process.stdin.pipe(socket);
+  process.stdin.resume();
+});
+socket.setEncoding(&#39;utf8&#39;);
+socket.on(&#39;data&#39;, function(data) {
+  console.log(data);
+});
+socket.on(&#39;end&#39;, function() {
+  server.close();
+});</code></pre>
+<p>Or
+
+</p>
+<pre><code>var tls = require(&#39;tls&#39;);
+var fs = require(&#39;fs&#39;);
+
+var options = {
+  pfx: fs.readFileSync(&#39;client.pfx&#39;)
+};
+
+var socket = tls.connect(8000, options, function() {
+  console.log(&#39;client connected&#39;,
+              socket.authorized ? &#39;authorized&#39; : &#39;unauthorized&#39;);
+  process.stdin.pipe(socket);
+  process.stdin.resume();
+});
+socket.setEncoding(&#39;utf8&#39;);
+socket.on(&#39;data&#39;, function(data) {
+  console.log(data);
+});
+socket.on(&#39;end&#39;, function() {
+  server.close();
+});</code></pre>
+<h2>Class: tls.TLSSocket<span><a class="mark" href="#tls_class_tls_tlssocket" id="tls_class_tls_tlssocket">#</a></span></h2>
+<p>Wrapper for instance of <a href="net.html#net_class_net_socket">net.Socket</a>, replaces internal socket read/write
+routines to perform transparent encryption/decryption of incoming/outgoing data.
+
+</p>
+<h2>new tls.TLSSocket(socket, options)<span><a class="mark" href="#tls_new_tls_tlssocket_socket_options" id="tls_new_tls_tlssocket_socket_options">#</a></span></h2>
+<p>Construct a new TLSSocket object from existing TCP socket.
+
+</p>
+<p><code>socket</code> is an instance of <a href="net.html#net_class_net_socket">net.Socket</a>
+
+</p>
+<p><code>options</code> is an object that might contain following properties:
+
+</p>
+<ul>
+<li><p><code>secureContext</code>: An optional TLS context object from
+ <code>tls.createSecureContext( ... )</code></p>
+</li>
+<li><p><code>isServer</code>: If true - TLS socket will be instantiated in server-mode</p>
+</li>
+<li><p><code>server</code>: An optional <a href="net.html#net_class_net_server">net.Server</a> instance</p>
+</li>
+<li><p><code>requestCert</code>: Optional, see <a href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized">tls.createSecurePair</a></p>
+</li>
+<li><p><code>rejectUnauthorized</code>: Optional, see <a href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized">tls.createSecurePair</a></p>
+</li>
+<li><p><code>NPNProtocols</code>: Optional, see <a href="#tls_tls_createserver_options_secureconnectionlistener">tls.createServer</a></p>
+</li>
+<li><p><code>SNICallback</code>: Optional, see <a href="#tls_tls_createserver_options_secureconnectionlistener">tls.createServer</a></p>
+</li>
+<li><p><code>session</code>: Optional, a <code>Buffer</code> instance, containing TLS session</p>
+</li>
+<li><p><code>requestOCSP</code>: Optional, if <code>true</code> - OCSP status request extension would
+be added to client hello, and <code>OCSPResponse</code> event will be emitted on socket
+before establishing secure communication</p>
+</li>
+</ul>
+<h2>tls.createSecureContext(details)<span><a class="mark" href="#tls_tls_createsecurecontext_details" id="tls_tls_createsecurecontext_details">#</a></span></h2>
+<p>Creates a credentials object, with the optional details being a
+dictionary with keys:
+
+</p>
+<ul>
+<li><code>pfx</code> : A string or buffer holding the PFX or PKCS12 encoded private
+key, certificate and CA certificates</li>
+<li><code>key</code> : A string holding the PEM encoded private key</li>
+<li><code>passphrase</code> : A string of passphrase for the private key or pfx</li>
+<li><code>cert</code> : A string holding the PEM encoded certificate</li>
+<li><code>ca</code> : Either a string or list of strings of PEM encoded CA
+certificates to trust.</li>
+<li><code>crl</code> : Either a string or list of strings of PEM encoded CRLs
+(Certificate Revocation List)</li>
+<li><code>ciphers</code>: A string describing the ciphers to use or exclude.
+Consult
+<a href="http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT">http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT</a>
+for details on the format.</li>
+<li><code>honorCipherOrder</code> : When choosing a cipher, use the server&#39;s preferences
+instead of the client preferences. For further details see <code>tls</code> module
+documentation.</li>
+</ul>
+<p>If no &#39;ca&#39; details are given, then Node.js will use the default
+publicly trusted list of CAs as given in
+</p>
+<p><a href="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt">http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt</a>.
+
+
+</p>
+<h2>tls.createSecurePair([context][, isServer][, requestCert][, rejectUnauthorized])<span><a class="mark" href="#tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized" id="tls_tls_createsecurepair_context_isserver_requestcert_rejectunauthorized">#</a></span></h2>
+<p>Creates a new secure pair object with two streams, one of which reads/writes
+encrypted data, and one reads/writes cleartext data.
+Generally the encrypted one is piped to/from an incoming encrypted data stream,
+and the cleartext one is used as a replacement for the initial encrypted stream.
+
+</p>
+<ul>
+<li><p><code>credentials</code>: A secure context object from tls.createSecureContext( ... )</p>
+</li>
+<li><p><code>isServer</code>: A boolean indicating whether this tls connection should be
+opened as a server or a client.</p>
+</li>
+<li><p><code>requestCert</code>: A boolean indicating whether a server should request a
+certificate from a connecting client. Only applies to server connections.</p>
+</li>
+<li><p><code>rejectUnauthorized</code>: A boolean indicating whether a server should
+automatically reject clients with invalid certificates. Only applies to
+servers with <code>requestCert</code> enabled.</p>
+</li>
+</ul>
+<p><code>tls.createSecurePair()</code> returns a SecurePair object with <code>cleartext</code> and
+<code>encrypted</code> stream properties.
+
+</p>
+<p>NOTE: <code>cleartext</code> has the same APIs as <a href="#tls_class_tls_tlssocket">tls.TLSSocket</a>
+
+</p>
+<h2>Class: SecurePair<span><a class="mark" href="#tls_class_securepair" id="tls_class_securepair">#</a></span></h2>
+<p>Returned by tls.createSecurePair.
+
+</p>
+<h3>Event: &#39;secure&#39;<span><a class="mark" href="#tls_event_secure" id="tls_event_secure">#</a></span></h3>
+<p>The event is emitted from the SecurePair once the pair has successfully
+established a secure connection.
+
+</p>
+<p>Similarly to the checking for the server &#39;secureConnection&#39; event,
+pair.cleartext.authorized should be checked to confirm whether the certificate
+used properly authorized.
+
+</p>
+<h2>Class: tls.Server<span><a class="mark" href="#tls_class_tls_server" id="tls_class_tls_server">#</a></span></h2>
+<p>This class is a subclass of <code>net.Server</code> and has the same methods on it.
+Instead of accepting just raw TCP connections, this accepts encrypted
+connections using TLS or SSL.
+
+</p>
+<h3>Event: &#39;secureConnection&#39;<span><a class="mark" href="#tls_event_secureconnection" id="tls_event_secureconnection">#</a></span></h3>
+<p><code>function (tlsSocket) {}</code>
+
+</p>
+<p>This event is emitted after a new connection has been successfully
+handshaked. The argument is an instance of <a href="#tls_class_tls_tlssocket">tls.TLSSocket</a>. It has all the
+common stream methods and events.
+
+</p>
+<p><code>socket.authorized</code> is a boolean value which indicates if the
+client has verified by one of the supplied certificate authorities for the
+server. If <code>socket.authorized</code> is false, then
+<code>socket.authorizationError</code> is set to describe how authorization
+failed. Implied but worth mentioning: depending on the settings of the TLS
+server, you unauthorized connections may be accepted.
+<code>socket.npnProtocol</code> is a string containing selected NPN protocol.
+<code>socket.servername</code> is a string containing servername requested with
+SNI.
+
+
+</p>
+<h3>Event: &#39;clientError&#39;<span><a class="mark" href="#tls_event_clienterror" id="tls_event_clienterror">#</a></span></h3>
+<p><code>function (exception, tlsSocket) { }</code>
+
+</p>
+<p>When a client connection emits an &#39;error&#39; event before secure connection is
+established - it will be forwarded here.
+
+</p>
+<p><code>tlsSocket</code> is the <a href="#tls_class_tls_tlssocket">tls.TLSSocket</a> that the error originated from.
+
+
+</p>
+<h3>Event: &#39;newSession&#39;<span><a class="mark" href="#tls_event_newsession" id="tls_event_newsession">#</a></span></h3>
+<p><code>function (sessionId, sessionData, callback) { }</code>
+
+</p>
+<p>Emitted on creation of TLS session. May be used to store sessions in external
+storage. <code>callback</code> must be invoked eventually, otherwise no data will be
+sent or received from secure connection.
+
+</p>
+<p>NOTE: adding this event listener will have an effect only on connections
+established after addition of event listener.
+
+
+</p>
+<h3>Event: &#39;resumeSession&#39;<span><a class="mark" href="#tls_event_resumesession" id="tls_event_resumesession">#</a></span></h3>
+<p><code>function (sessionId, callback) { }</code>
+
+</p>
+<p>Emitted when client wants to resume previous TLS session. Event listener may
+perform lookup in external storage using given <code>sessionId</code>, and invoke
+<code>callback(null, sessionData)</code> once finished. If session can&#39;t be resumed
+(i.e. doesn&#39;t exist in storage) one may call <code>callback(null, null)</code>. Calling
+<code>callback(err)</code> will terminate incoming connection and destroy socket.
+
+</p>
+<p>NOTE: adding this event listener will have an effect only on connections
+established after addition of event listener.
+
+</p>
+<p>Here&#39;s an example for using TLS session resumption:
+
+</p>
+<p>  var tlsSessionStore = {};
+  server.on(&#39;newSession&#39;, function(id, data, cb) {
+    tlsSessionStore[id.toString(&#39;hex&#39;)] = data;
+    cb();
+  });
+  server.on(&#39;resumeSession&#39;, function(id, cb) {
+    cb(null, tlsSessionStore[id.toString(&#39;hex&#39;)] || null);
+  });
+
+</p>
+<h3>Event: &#39;OCSPRequest&#39;<span><a class="mark" href="#tls_event_ocsprequest" id="tls_event_ocsprequest">#</a></span></h3>
+<p><code>function (certificate, issuer, callback) { }</code>
+
+</p>
+<p>Emitted when the client sends a certificate status request. You could parse
+server&#39;s current certificate to obtain OCSP url and certificate id, and after
+obtaining OCSP response invoke <code>callback(null, resp)</code>, where <code>resp</code> is a
+<code>Buffer</code> instance. Both <code>certificate</code> and <code>issuer</code> are a <code>Buffer</code>
+DER-representations of the primary and issuer&#39;s certificates. They could be used
+to obtain OCSP certificate id and OCSP endpoint url.
+
+</p>
+<p>Alternatively, <code>callback(null, null)</code> could be called, meaning that there is no
+OCSP response.
+
+</p>
+<p>Calling <code>callback(err)</code> will result in a <code>socket.destroy(err)</code> call.
+
+</p>
+<p>Typical flow:
+
+</p>
+<ol>
+<li>Client connects to server and sends <code>OCSPRequest</code> to it (via status info
+extension in ClientHello.)</li>
+<li>Server receives request and invokes <code>OCSPRequest</code> event listener if present</li>
+<li>Server grabs OCSP url from either <code>certificate</code> or <code>issuer</code> and performs an
+<a href="http://en.wikipedia.org/wiki/OCSP_stapling">OCSP request</a> to the CA</li>
+<li>Server receives <code>OCSPResponse</code> from CA and sends it back to client via
+<code>callback</code> argument</li>
+<li>Client validates the response and either destroys socket or performs a
+handshake.</li>
+</ol>
+<p>NOTE: <code>issuer</code> could be null, if the certificate is self-signed or if the issuer
+is not in the root certificates list. (You could provide an issuer via <code>ca</code>
+option.)
+
+</p>
+<p>NOTE: adding this event listener will have an effect only on connections
+established after addition of event listener.
+
+</p>
+<p>NOTE: you may want to use some npm module like <a href="http://npmjs.org/package/asn1.js">asn1.js</a> to parse the
+certificates.
+
+
+</p>
+<h3>server.listen(port[, hostname][, callback])<span><a class="mark" href="#tls_server_listen_port_hostname_callback" id="tls_server_listen_port_hostname_callback">#</a></span></h3>
+<p>Begin accepting connections on the specified <code>port</code> and <code>hostname</code>. If the
+<code>hostname</code> is omitted, the server will accept connections on any IPv6 address
+(<code>::</code>) when IPv6 is available, or any IPv4 address (<code>0.0.0.0</code>) otherwise. A
+port value of zero will assign a random port.
+
+</p>
+<p>This function is asynchronous. The last parameter <code>callback</code> will be called
+when the server has been bound.
+
+</p>
+<p>See <code>net.Server</code> for more information.
+
+
+</p>
+<h3>server.close([callback])<span><a class="mark" href="#tls_server_close_callback" id="tls_server_close_callback">#</a></span></h3>
+<p>Stops the server from accepting new connections. This function is
+asynchronous, the server is finally closed when the server emits a <code>&#39;close&#39;</code>
+event.  Optionally, you can pass a callback to listen for the <code>&#39;close&#39;</code> event.
+
+</p>
+<h3>server.address()<span><a class="mark" href="#tls_server_address" id="tls_server_address">#</a></span></h3>
+<p>Returns the bound address, the address family name and port of the
+server as reported by the operating system.  See <a href="net.html#net_server_address">net.Server.address()</a> for
+more information.
+
+</p>
+<h3>server.getTicketKeys()<span><a class="mark" href="#tls_server_getticketkeys" id="tls_server_getticketkeys">#</a></span></h3>
+<p>Returns <code>Buffer</code> instance holding the keys currently used for
+encryption/decryption of the <a href="https://www.ietf.org/rfc/rfc5077.txt">TLS Session Tickets</a>
+
+</p>
+<h3>server.setTicketKeys(keys)<span><a class="mark" href="#tls_server_setticketkeys_keys" id="tls_server_setticketkeys_keys">#</a></span></h3>
+<p>Updates the keys for encryption/decryption of the <a href="https://www.ietf.org/rfc/rfc5077.txt">TLS Session Tickets</a>.
+
+</p>
+<p>NOTE: the buffer should be 48 bytes long. See server <code>ticketKeys</code> option for
+more information oh how it is going to be used.
+
+</p>
+<p>NOTE: the change is effective only for the future server connections. Existing
+or currently pending server connections will use previous keys.
+
+</p>
+<h3>server.addContext(hostname, context)<span><a class="mark" href="#tls_server_addcontext_hostname_context" id="tls_server_addcontext_hostname_context">#</a></span></h3>
+<p>Add secure context that will be used if client request&#39;s SNI hostname is
+matching passed <code>hostname</code> (wildcards can be used). <code>context</code> can contain
+<code>key</code>, <code>cert</code>, <code>ca</code> and/or any other properties from <code>tls.createSecureContext</code>
+<code>options</code> argument.
+
+</p>
+<h3>server.maxConnections<span><a class="mark" href="#tls_server_maxconnections" id="tls_server_maxconnections">#</a></span></h3>
+<p>Set this property to reject connections when the server&#39;s connection count
+gets high.
+
+</p>
+<h3>server.connections<span><a class="mark" href="#tls_server_connections" id="tls_server_connections">#</a></span></h3>
+<p>The number of concurrent connections on the server.
+
+
+</p>
+<h2>Class: CryptoStream<span><a class="mark" href="#tls_class_cryptostream" id="tls_class_cryptostream">#</a></span></h2>
+<pre class="api_stability_0">Stability: 0 - Deprecated: Use <a href="#tls_class_tls_tlssocket">tls.TLSSocket</a> instead.</pre><p>This is an encrypted stream.
+
+</p>
+<h3>cryptoStream.bytesWritten<span><a class="mark" href="#tls_cryptostream_byteswritten" id="tls_cryptostream_byteswritten">#</a></span></h3>
+<p>A proxy to the underlying socket&#39;s bytesWritten accessor, this will return
+the total bytes written to the socket, <em>including the TLS overhead</em>.
+
+</p>
+<h2>Class: tls.TLSSocket<span><a class="mark" href="#tls_class_tls_tlssocket_1" id="tls_class_tls_tlssocket_1">#</a></span></h2>
+<p>This is a wrapped version of <a href="net.html#net_class_net_socket">net.Socket</a> that does transparent encryption
+of written data and all required TLS negotiation.
+
+</p>
+<p>This instance implements a duplex <a href="stream.html#stream_stream">Stream</a> interfaces.  It has all the
+common stream methods and events.
+
+</p>
+<h3>Event: &#39;secureConnect&#39;<span><a class="mark" href="#tls_event_secureconnect" id="tls_event_secureconnect">#</a></span></h3>
+<p>This event is emitted after a new connection has been successfully handshaked.
+The listener will be called no matter if the server&#39;s certificate was
+authorized or not. It is up to the user to test <code>tlsSocket.authorized</code>
+to see if the server certificate was signed by one of the specified CAs.
+If <code>tlsSocket.authorized === false</code> then the error can be found in
+<code>tlsSocket.authorizationError</code>. Also if NPN was used - you can check
+<code>tlsSocket.npnProtocol</code> for negotiated protocol.
+
+</p>
+<h3>Event: &#39;OCSPResponse&#39;<span><a class="mark" href="#tls_event_ocspresponse" id="tls_event_ocspresponse">#</a></span></h3>
+<p><code>function (response) { }</code>
+
+</p>
+<p>This event will be emitted if <code>requestOCSP</code> option was set. <code>response</code> is a
+buffer object, containing server&#39;s OCSP response.
+
+</p>
+<p>Traditionally, the <code>response</code> is a signed object from the server&#39;s CA that
+contains information about server&#39;s certificate revocation status.
+
+</p>
+<h3>tlsSocket.encrypted<span><a class="mark" href="#tls_tlssocket_encrypted" id="tls_tlssocket_encrypted">#</a></span></h3>
+<p>Static boolean value, always <code>true</code>. May be used to distinguish TLS sockets
+from regular ones.
+
+</p>
+<h3>tlsSocket.authorized<span><a class="mark" href="#tls_tlssocket_authorized" id="tls_tlssocket_authorized">#</a></span></h3>
+<p>A boolean that is <code>true</code> if the peer certificate was signed by one of the
+specified CAs, otherwise <code>false</code>
+
+</p>
+<h3>tlsSocket.authorizationError<span><a class="mark" href="#tls_tlssocket_authorizationerror" id="tls_tlssocket_authorizationerror">#</a></span></h3>
+<p>The reason why the peer&#39;s certificate has not been verified. This property
+becomes available only when <code>tlsSocket.authorized === false</code>.
+
+</p>
+<h3>tlsSocket.getPeerCertificate([ detailed ])<span><a class="mark" href="#tls_tlssocket_getpeercertificate_detailed" id="tls_tlssocket_getpeercertificate_detailed">#</a></span></h3>
+<p>Returns an object representing the peer&#39;s certificate. The returned object has
+some properties corresponding to the field of the certificate. If <code>detailed</code>
+argument is <code>true</code> - the full chain with <code>issuer</code> property will be returned,
+if <code>false</code> - only the top certificate without <code>issuer</code> property.
+
+</p>
+<p>Example:
+
+</p>
+<pre><code>{ subject:
+   { C: &#39;UK&#39;,
+     ST: &#39;Acknack Ltd&#39;,
+     L: &#39;Rhys Jones&#39;,
+     O: &#39;node.js&#39;,
+     OU: &#39;Test TLS Certificate&#39;,
+     CN: &#39;localhost&#39; },
+  issuerInfo:
+   { C: &#39;UK&#39;,
+     ST: &#39;Acknack Ltd&#39;,
+     L: &#39;Rhys Jones&#39;,
+     O: &#39;node.js&#39;,
+     OU: &#39;Test TLS Certificate&#39;,
+     CN: &#39;localhost&#39; },
+  issuer:
+   { ... another certificate ... },
+  raw: &lt; RAW DER buffer &gt;,
+  valid_from: &#39;Nov 11 09:52:22 2009 GMT&#39;,
+  valid_to: &#39;Nov  6 09:52:22 2029 GMT&#39;,
+  fingerprint: &#39;2A:7A:C2:DD:E5:F9:CC:53:72:35:99:7A:02:5A:71:38:52:EC:8A:DF&#39;,
+  serialNumber: &#39;B9B0D332A1AA5635&#39; }</code></pre>
+<p>If the peer does not provide a certificate, it returns <code>null</code> or an empty
+object.
+
+</p>
+<h3>tlsSocket.getCipher()<span><a class="mark" href="#tls_tlssocket_getcipher" id="tls_tlssocket_getcipher">#</a></span></h3>
+<p>Returns an object representing the cipher name and the SSL/TLS
+protocol version of the current connection.
+
+</p>
+<p>Example:
+{ name: &#39;AES256-SHA&#39;, version: &#39;TLSv1/SSLv3&#39; }
+
+</p>
+<p>See SSL_CIPHER_get_name() and SSL_CIPHER_get_version() in
+<a href="http://www.openssl.org/docs/ssl/ssl.html#DEALING_WITH_CIPHERS">http://www.openssl.org/docs/ssl/ssl.html#DEALING_WITH_CIPHERS</a> for more
+information.
+
+</p>
+<h3>tlsSocket.renegotiate(options, callback)<span><a class="mark" href="#tls_tlssocket_renegotiate_options_callback" id="tls_tlssocket_renegotiate_options_callback">#</a></span></h3>
+<p>Initiate TLS renegotiation process. The <code>options</code> may contain the following
+fields: <code>rejectUnauthorized</code>, <code>requestCert</code> (See <a href="#tls_tls_createserver_options_secureconnectionlistener">tls.createServer</a>
+for details). <code>callback(err)</code> will be executed with <code>null</code> as <code>err</code>,
+once the renegotiation is successfully completed.
+
+</p>
+<p>NOTE: Can be used to request peer&#39;s certificate after the secure connection
+has been established.
+
+</p>
+<p>ANOTHER NOTE: When running as the server, socket will be destroyed
+with an error after <code>handshakeTimeout</code> timeout.
+
+</p>
+<h3>tlsSocket.setMaxSendFragment(size)<span><a class="mark" href="#tls_tlssocket_setmaxsendfragment_size" id="tls_tlssocket_setmaxsendfragment_size">#</a></span></h3>
+<p>Set maximum TLS fragment size (default and maximum value is: <code>16384</code>, minimum
+is: <code>512</code>). Returns <code>true</code> on success, <code>false</code> otherwise.
+
+</p>
+<p>Smaller fragment size decreases buffering latency on the client: large
+fragments are buffered by the TLS layer until the entire fragment is received
+and its integrity is verified; large fragments can span multiple roundtrips,
+and their processing can be delayed due to packet loss or reordering. However,
+smaller fragments add extra TLS framing bytes and CPU overhead, which may
+decrease overall server throughput.
+
+</p>
+<h3>tlsSocket.getSession()<span><a class="mark" href="#tls_tlssocket_getsession" id="tls_tlssocket_getsession">#</a></span></h3>
+<p>Return ASN.1 encoded TLS session or <code>undefined</code> if none was negotiated. Could
+be used to speed up handshake establishment when reconnecting to the server.
+
+</p>
+<h3>tlsSocket.getTLSTicket()<span><a class="mark" href="#tls_tlssocket_gettlsticket" id="tls_tlssocket_gettlsticket">#</a></span></h3>
+<p>NOTE: Works only with client TLS sockets. Useful only for debugging, for
+session reuse provide <code>session</code> option to <code>tls.connect</code>.
+
+</p>
+<p>Return TLS session ticket or <code>undefined</code> if none was negotiated.
+
+</p>
+<h3>tlsSocket.address()<span><a class="mark" href="#tls_tlssocket_address" id="tls_tlssocket_address">#</a></span></h3>
+<p>Returns the bound address, the address family name and port of the
+underlying socket as reported by the operating system. Returns an
+object with three properties, e.g.
+<code>{ port: 12346, family: &#39;IPv4&#39;, address: &#39;127.0.0.1&#39; }</code>
+
+</p>
+<h3>tlsSocket.remoteAddress<span><a class="mark" href="#tls_tlssocket_remoteaddress" id="tls_tlssocket_remoteaddress">#</a></span></h3>
+<p>The string representation of the remote IP address. For example,
+<code>&#39;74.125.127.100&#39;</code> or <code>&#39;2001:4860:a005::68&#39;</code>.
+
+</p>
+<h3>tlsSocket.remoteFamily<span><a class="mark" href="#tls_tlssocket_remotefamily" id="tls_tlssocket_remotefamily">#</a></span></h3>
+<p>The string representation of the remote IP family. <code>&#39;IPv4&#39;</code> or <code>&#39;IPv6&#39;</code>.
+
+</p>
+<h3>tlsSocket.remotePort<span><a class="mark" href="#tls_tlssocket_remoteport" id="tls_tlssocket_remoteport">#</a></span></h3>
+<p>The numeric representation of the remote port. For example, <code>443</code>.
+
+</p>
+<h3>tlsSocket.localAddress<span><a class="mark" href="#tls_tlssocket_localaddress" id="tls_tlssocket_localaddress">#</a></span></h3>
+<p>The string representation of the local IP address.
+
+</p>
+<h3>tlsSocket.localPort<span><a class="mark" href="#tls_tlssocket_localport" id="tls_tlssocket_localport">#</a></span></h3>
+<p>The numeric representation of the local port.
+
+</p>
+
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+  </div>
+
+  <script src="assets/sh_main.js"></script>
+  <script src="assets/sh_javascript.min.js"></script>
+  <script>highlight(undefined, undefined, 'pre');</script>
+</body>
+</html>
+
