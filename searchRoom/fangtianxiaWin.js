@@ -2,9 +2,10 @@
  * Created by yangyuhan on 10/27/15.
  */
 var request = require("request");
+var iconv = require('iconv-lite');
 
 
-
+iconv.defaultCharUnicode();
 
 
 var baseUrl = "http://zu.sh.fang.com/";
@@ -14,6 +15,9 @@ for(var f = 31;f<132;f++){
     pages.push(url);
 }
 
-request.get(pages[0], function (err,res,body) {
-    console.log(body);
+request.get({
+    url:pages[0],
+    encoding : null
+}, function (err,res,body) {
+    console.log(iconv.decode(body, 'gb2312'));
 });
