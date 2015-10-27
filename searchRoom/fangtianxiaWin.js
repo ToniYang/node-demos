@@ -5,8 +5,6 @@ var request = require("request");
 var iconv = require('iconv-lite');
 
 
-iconv.defaultCharUnicode();
-
 
 var baseUrl = "http://zu.sh.fang.com/";
 var pages = [];
