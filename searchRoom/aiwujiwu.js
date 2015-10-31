@@ -12,13 +12,13 @@ var cheerio = require('cheerio');
 
 var fs = require("fs");
 
-var houseCol = require("./mongo.js")
+var houseCol = require("./mongo.js");
 
 //var env = require('jsdom').env;
 
 function collection(){
     var pages = [];
-    for(var f = 1;f<300;f++){
+    for(var f = 1;f<101;f++){
         var url = baseUrl + "shanghai/o1p" + f + "/";
         pages.push(url);
     }
@@ -62,7 +62,12 @@ function collection(){
                             money : mo,
                             url:ur
                         });
-                        host.save();
+                        houseCol.find({url:url}, function (err,results) {
+                            results.forEach(function (item) {
+                                item.remove();
+                            });
+                            host.save();
+                        });
                     }
                 });
             }catch(e){

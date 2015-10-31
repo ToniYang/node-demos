@@ -1,0 +1,190 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'zlib',
+1 verbose cli   '--save-dev' ]
+2 info using npm@2.14.3
+3 info using node@v4.2.1
+4 verbose install initial load of /Users/yangyuhan/WebstormProjects/nodeLearn/package.json
+5 warn package.json node-learn@1.0.0 No repository field.
+6 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/body-parser/package.json
+7 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/cheerio/package.json
+8 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/express/package.json
+9 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/iconv/package.json
+10 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/iconv-lite/package.json
+11 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/jquery/package.json
+12 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/jsdom/package.json
+13 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/mongoose/package.json
+14 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/multer/package.json
+15 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/node-jquery/package.json
+16 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/phantom/package.json
+17 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/phantomjs/package.json
+18 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/request/package.json
+19 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/underscore/package.json
+20 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/xmldom/package.json
+21 verbose installManyTop reading scoped package data from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/xpath.js/package.json
+22 info package.json node-jquery@0.1.0 No repository field.
+23 info package.json node-jquery@0.1.0 No README data
+24 info package.json xmldom@0.1.19 No license field.
+25 info package.json jquery@2.1.4 No license field.
+26 verbose readDependencies loading dependencies from /Users/yangyuhan/WebstormProjects/nodeLearn/package.json
+27 silly cache add args [ 'zlib', null ]
+28 verbose cache add spec zlib
+29 silly cache add parsed spec Result {
+29 silly cache add   raw: 'zlib',
+29 silly cache add   scope: null,
+29 silly cache add   name: 'zlib',
+29 silly cache add   rawSpec: '',
+29 silly cache add   spec: '*',
+29 silly cache add   type: 'range' }
+30 silly addNamed zlib@*
+31 verbose addNamed "*" is a valid semver range for zlib
+32 silly addNameRange { name: 'zlib', range: '*', hasData: false }
+33 silly mapToRegistry name zlib
+34 silly mapToRegistry using default registry
+35 silly mapToRegistry registry https://registry.npmjs.org/
+36 silly mapToRegistry uri https://registry.npmjs.org/zlib
+37 verbose addNameRange registry:https://registry.npmjs.org/zlib not in flight; fetching
+38 verbose request uri https://registry.npmjs.org/zlib
+39 verbose request no auth needed
+40 info attempt registry request try #1 at 9:01:56 PM
+41 verbose request id 48822a80b932ab04
+42 http request GET https://registry.npmjs.org/zlib
+43 http 200 https://registry.npmjs.org/zlib
+44 silly get cb [ 200,
+44 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+44 silly get     etag: '"5ZD8OZO6M8FVHQHJHDOOR2QN9"',
+44 silly get     'content-type': 'application/json',
+44 silly get     'cache-control': 'max-age=60',
+44 silly get     'content-length': '6093',
+44 silly get     'accept-ranges': 'bytes',
+44 silly get     date: 'Tue, 27 Oct 2015 13:01:57 GMT',
+44 silly get     via: '1.1 varnish',
+44 silly get     age: '0',
+44 silly get     connection: 'keep-alive',
+44 silly get     'x-served-by': 'cache-nrt6132-NRT',
+44 silly get     'x-cache': 'MISS',
+44 silly get     'x-cache-hits': '0',
+44 silly get     'x-timer': 'S1445950917.280782,VS0,VE144',
+44 silly get     vary: 'Accept' } ]
+45 verbose get saving zlib to /Users/yangyuhan/.npm/registry.npmjs.org/zlib/.cache.json
+46 silly addNameRange number 2 { name: 'zlib', range: '*', hasData: true }
+47 silly addNameRange versions [ 'zlib',
+47 silly addNameRange   [ '1.0.0', '1.0.1', '1.0.2', '1.0.3', '1.0.4', '1.0.5' ] ]
+48 silly addNamed zlib@1.0.5
+49 verbose addNamed "1.0.5" is a plain semver version for zlib
+50 silly mapToRegistry name zlib
+51 silly mapToRegistry using default registry
+52 silly mapToRegistry registry https://registry.npmjs.org/
+53 silly mapToRegistry uri https://registry.npmjs.org/zlib
+54 verbose addRemoteTarball https://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz not in flight; adding
+55 verbose addRemoteTarball [ 'https://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz',
+55 verbose addRemoteTarball   '6e7c972fc371c645a6afb03ab14769def114fcc0' ]
+56 info retry fetch attempt 1 at 9:01:57 PM
+57 info attempt registry request try #1 at 9:01:57 PM
+58 http fetch GET https://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz
+59 http fetch 200 https://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz
+60 silly fetchAndShaCheck shasum 6e7c972fc371c645a6afb03ab14769def114fcc0
+61 verbose addTmpTarball /var/folders/nr/mgsx_xbs5rl945plfyvph9vh0000gn/T/npm-1345-8f80dd36/registry.npmjs.org/zlib/-/zlib-1.0.5.tgz not in flight; adding
+62 verbose addTmpTarball already have metadata; skipping unpack for zlib@1.0.5
+63 silly cache afterAdd zlib@1.0.5
+64 verbose afterAdd /Users/yangyuhan/.npm/zlib/1.0.5/package/package.json not in flight; writing
+65 verbose afterAdd /Users/yangyuhan/.npm/zlib/1.0.5/package/package.json written
+66 silly install resolved [ { name: 'zlib',
+66 silly install resolved     description: 'Simple, synchronous deflate/inflate for buffers',
+66 silly install resolved     version: '1.0.5',
+66 silly install resolved     homepage: 'https://github.com/kkaefer/node-zlib',
+66 silly install resolved     author: { name: 'Konstantin Käfer', email: 'kkaefer@gmail.com' },
+66 silly install resolved     repository: { type: 'git', url: 'git://github.com/kkaefer/node-zlib.git' },
+66 silly install resolved     engines: { node: '>=0.2.0' },
+66 silly install resolved     licenses: [ [Object] ],
+66 silly install resolved     main: './lib/zlib',
+66 silly install resolved     _npmJsonOpts:
+66 silly install resolved      { file: '/Users/kkaefer/.npm/zlib/1.0.5/package/package.json',
+66 silly install resolved        contributors: false,
+66 silly install resolved        serverjs: false,
+66 silly install resolved        wscript: true },
+66 silly install resolved     _id: 'zlib@1.0.5',
+66 silly install resolved     scripts: { preinstall: 'node-waf clean || true; node-waf configure build' },
+66 silly install resolved     dependencies: {},
+66 silly install resolved     devDependencies: {},
+66 silly install resolved     _engineSupported: true,
+66 silly install resolved     _npmVersion: '1.0.23',
+66 silly install resolved     _nodeVersion: 'v0.4.9',
+66 silly install resolved     _defaultsLoaded: true,
+66 silly install resolved     dist:
+66 silly install resolved      { shasum: '6e7c972fc371c645a6afb03ab14769def114fcc0',
+66 silly install resolved        tarball: 'http://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz' },
+66 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
+66 silly install resolved     directories: {},
+66 silly install resolved     _shasum: '6e7c972fc371c645a6afb03ab14769def114fcc0',
+66 silly install resolved     _resolved: 'https://registry.npmjs.org/zlib/-/zlib-1.0.5.tgz',
+66 silly install resolved     _from: 'zlib@*' } ]
+67 info install zlib@1.0.5 into /Users/yangyuhan/WebstormProjects/nodeLearn
+68 info installOne zlib@1.0.5
+69 verbose installOne of zlib to /Users/yangyuhan/WebstormProjects/nodeLearn not in flight; installing
+70 verbose lock using /Users/yangyuhan/.npm/_locks/zlib-6f5121cdbd629bcd.lock for /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+71 silly install write writing zlib 1.0.5 to /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+72 verbose unbuild node_modules/zlib
+73 silly gentlyRm /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib is being purged from base /Users/yangyuhan/WebstormProjects/nodeLearn
+74 verbose gentlyRm don't care about contents; nuking /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+75 verbose tar unpack /Users/yangyuhan/.npm/zlib/1.0.5/package.tgz
+76 verbose tar unpacking to /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+77 silly gentlyRm /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib is being purged
+78 verbose gentlyRm don't care about contents; nuking /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+79 silly gunzTarPerm modes [ '755', '644' ]
+80 silly gunzTarPerm extractEntry .gitignore
+81 silly gunzTarPerm extractEntry configure
+82 silly gunzTarPerm extractEntry index.js
+83 silly gunzTarPerm extractEntry LICENSE
+84 silly gunzTarPerm extractEntry Makefile
+85 silly gunzTarPerm extractEntry package.json
+86 silly gunzTarPerm extractEntry README.md
+87 silly gunzTarPerm extractEntry wscript
+88 silly gunzTarPerm extractEntry lib/zlib.js
+89 silly gunzTarPerm extractEntry src/node-zlib.cc
+90 silly gunzTarPerm extractEntry test/deflate.test.js
+91 silly gunzTarPerm extractEntry test/inflate.test.js
+92 verbose write writing to /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib/package.json
+93 info preinstall zlib@1.0.5
+94 verbose unsafe-perm in lifecycle true
+95 info zlib@1.0.5 Failed to exec preinstall script
+96 verbose unlock done using /Users/yangyuhan/.npm/_locks/zlib-6f5121cdbd629bcd.lock for /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+97 verbose stack Error: zlib@1.0.5 preinstall: `node-waf clean || true; node-waf configure build`
+97 verbose stack spawn ENOENT
+97 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:17:16)
+97 verbose stack     at emitTwo (events.js:87:13)
+97 verbose stack     at ChildProcess.emit (events.js:172:7)
+97 verbose stack     at maybeClose (internal/child_process.js:818:16)
+97 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+98 verbose pkgid zlib@1.0.5
+99 verbose cwd /Users/yangyuhan/WebstormProjects/nodeLearn
+100 error Darwin 14.5.0
+101 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "zlib" "--save-dev"
+102 error node v4.2.1
+103 error npm  v2.14.3
+104 error file sh
+105 error code ELIFECYCLE
+106 error errno ENOENT
+107 error syscall spawn
+108 error zlib@1.0.5 preinstall: `node-waf clean || true; node-waf configure build`
+108 error spawn ENOENT
+109 error Failed at the zlib@1.0.5 preinstall script 'node-waf clean || true; node-waf configure build'.
+109 error This is most likely a problem with the zlib package,
+109 error not with npm itself.
+109 error Tell the author that this fails on your system:
+109 error     node-waf clean || true; node-waf configure build
+109 error You can get their info via:
+109 error     npm owner ls zlib
+109 error There is likely additional logging output above.
+110 verbose exit [ 1, true ]
+111 verbose unbuild node_modules/zlib
+112 info preuninstall zlib@1.0.5
+113 info uninstall zlib@1.0.5
+114 verbose unbuild rmStuff zlib@1.0.5 from /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules
+115 info postuninstall zlib@1.0.5
+116 silly gentlyRm /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib is being purged from base /Users/yangyuhan/WebstormProjects/nodeLearn
+117 verbose gentlyRm don't care about contents; nuking /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+118 silly vacuum-fs purging /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules/zlib
+119 silly vacuum-fs quitting because other entries in /Users/yangyuhan/WebstormProjects/nodeLearn/node_modules

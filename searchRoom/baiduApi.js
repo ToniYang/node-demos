@@ -1,10 +1,10 @@
 /**
  * Created by yangyuhan on 10/26/15.
  */
-
+var HouseCol = require("./mongo.js");
 var request = require("request");
 var _ = require("underscore");
-var ak = "QnLgpLhiQVbM7AoIpeIZlkKe";
+var ak = "2ptVg1e3yC2GiVuswBYIUNSj";
 
 function find(origin,destination,callback,obj){
     var url = "http://api.map.baidu.com/direction/v1?";
@@ -32,7 +32,8 @@ function find(origin,destination,callback,obj){
                         }
                     }
                 }catch(e){
-
+                    console.log(body);
+                    console.log(e);
                 }
 
             } else {
@@ -47,11 +48,14 @@ function find(origin,destination,callback,obj){
 }
 
 function findPlace (name,callback,obj){
-    var url = "http://api.map.baidu.com/place/v2/suggestion?";
+    var url = "http://api.map.baidu.com/place/v2/search?";
     var option ={
         query : name,
         region : '上海市',
         output : 'json',
+        page_size : 10,
+        page_num : 0,
+        region : "上海",
         ak : ak
     };
     url += _.keys(option).map(function (value) {return value+"="+ encodeURIComponent(option[value])}).toString().replace(/,/g,"&");
@@ -60,8 +64,8 @@ function findPlace (name,callback,obj){
         try{
             if(!err && res.statusCode ===200){
                 body = JSON.parse(body);
-                if(body.result && body.result[0]){
-                    callback(body.result[0].name,obj);
+                if(body.results && body.results[0]){
+                    callback(body.results[0].name,obj);
                 }else{
                     callback(name,obj);
                 }
@@ -78,14 +82,14 @@ var findObj = {
         return function (origin,obj) {
             setTimeout(function () {
                 find(origin,"现代大厦",callback,obj);
-            },100)
+            },500)
         }
     },
     wayToSchool : function (callback) {
         return function (origin,obj) {
             setTimeout(function () {
-                find(origin,"上海电视大学",callback,obj);
-            },100);
+                find(origin,"火星一号商业广场",callback,obj);
+            },500);
         }
     },
     findPlace : findPlace
@@ -94,18 +98,15 @@ var findObj = {
 var wayToSchool = findObj.wayToSchool(callback01);
 var wayToWork = findObj.wayToWork(callback02);
 
-function callback02 (){
-    if(arguments[1] < 60 * 60){
-        console.log(arguments[0]);
-        console.log(arguments[2]);
-    }
+function callback02 (region,time,obj){
+    obj.toWork = time;
+    HouseCol.update({"_id":obj._id},{"$set":obj});
 }
 
 function callback01 (region,time,obj) {
-    if( time < 20 * 60){
-        console.log(obj);
-        wayToWork(region,obj);
-    }
+    obj.toScl = time;
+    HouseCol.update({"_id":obj._id},{"$set":obj});
+    wayToWork(region,obj);
 }
 
 var filterLocation = function (wayToSchool) {
@@ -116,6 +117,6 @@ var filterLocation = function (wayToSchool) {
     }
 }(wayToSchool);
 
- console.log(filterLocation);
 
 module.exports = filterLocation;
+
