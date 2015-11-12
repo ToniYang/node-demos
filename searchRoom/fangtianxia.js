@@ -3,10 +3,10 @@
  */
 var request = require("request");
 //var baidApi = require('./baiduApi');
-//var house = require('./mongo.js');
+var house = require('./mongo.js');
 var baseUrl = "http://zu.sh.fang.com/";
 var fs = require("fs");
-//var urlOption = require("url");
+var urlOption = require("url");
 //var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 var zlib = require('zlib');
@@ -99,34 +99,27 @@ function collection(){
             encoding: null
         };
         request(options, function (err,res,body) {
+
             try{
                 zlib.gunzip(body, function (err,decode) {
                     var html = iconv.decode(decode, 'gb2312');
-                    var doc = new dom().parseFromString(html,"text/html");
+                    var doc = new dom().parseFromString(html.replace("xmlns=\"http://www.w3.org/1999/xhtml\"",""),"text/html");
                     mesWantToGet.map(function (item) {
                         if(select(doc, item.address01) && select(doc, item.address01)[0] && select(doc, item.address01)[0].data){
                             var ad01 = select(doc, item.address01)[0].data;
                             var ad02 = select(doc, item.address02)[0].data;
                             var ad03 = select(doc, item.address03)[0].data;
                             var ad04 = select(doc, item.address04)[0].data;
-                            var mo = select(doc, item.money)[0].data;
+                            var mo = select(doc, item.money)[0].data.replace(/\s/g,"");
                             var ur = select(doc, item.url)[0].value;
-                            console.log(ad01 + ad02 + ad03 + ad04);
-                            console.log(mo);
-                            console.log(ur);
-                            //var host = new houseCol({
-                            //    address : ad,
-                            //    money : mo,
-                            //    url:ur
-                            //});
-                            //houseCol.find({url:url}, function (err,results) {
-                            //    results.forEach(function (item) {
-                            //        item.remove();
-                            //    });
-                            //    host.save();
-                            //});
-                        }
-                    });
+                            ur =  urlOption.resolve(baseUrl,ur);
+                            var host = new house({
+                                address : ad01+ad02+ad03+ad04,
+                                money : mo,
+                                url:ur});
+                            host.save();
+                    }
+                });
                 });
             }catch(e){
                 console.log(e);
@@ -175,16 +168,7 @@ function collection(){
     })
 }
 
-function test_xpath(){
-    fs.readFile("../fangtianxia.html", function () {
-        var doc = new dom().parseFromString(arguments[1].toString(),"text/html");
-        console.log(doc);
-        console.log(select(doc, "/html/head/title/text()")[0].data);
-    })
-};
-
-test_xpath();
 
 
-//collection();
+collection();
 
